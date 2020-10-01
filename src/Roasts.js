@@ -18,12 +18,14 @@ class Roasts extends React.Component {
   handleUpvote = (post_id) => (event) => {
     let post_url = "http://127.0.0.1:8000/api/homepage/" + post_id + "/upvote/";
     fetch(post_url, { method: "POST" });
+    window.location.href = "/roasts";
   };
 
   handleDownvote = (post_id) => (event) => {
     let post_url =
       "http://127.0.0.1:8000/api/homepage/" + post_id + "/downvote/";
     fetch(post_url, { method: "POST" });
+    window.location.href = "/roasts";
   };
 
   render() {
@@ -55,7 +57,7 @@ class Roasts extends React.Component {
               <ul>
                 <li>Id: {p.id}</li>
                 <li>Post: {p.post_text}</li>
-                <li>Vote Score: {p.total_votes}</li>
+                <li>Vote Score: {p.up_votes - p.down_votes}</li>
                 <li>Submission Time: {p.submission_time}</li>
                 <li>Last Updated: {p.last_updated}</li>
                 <br />
