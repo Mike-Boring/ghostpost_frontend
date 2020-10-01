@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 class CreatePost extends React.Component {
   constructor(props) {
@@ -45,57 +47,62 @@ class CreatePost extends React.Component {
         <br />
         <div className="menu-links">
           <Link to="/">
-            <button>All Posts</button>
+            <Button>All Posts</Button>
           </Link>
           <Link to="/boasts">
-            <button>All Boasts</button>
+            <Button>All Boasts</Button>
           </Link>
           <Link to="/roasts">
-            <button>All Roasts</button>
+            <Button>All Roasts</Button>
           </Link>
           <Link to="/popular">
-            <button>Most Popular</button>
+            <Button>Most Popular</Button>
           </Link>
           <Link to="/create">
-            <button>Create Post</button>
+            <Button>Create Post</Button>
           </Link>
         </div>
         <div className="main">
           <h1>Ghost Post</h1>
           <h2>- Create Post</h2>
-          <form id="postmessage-form" onSubmit={this.handleAddPost}>
-            <label>
-              Boast or Roast:&nbsp;
-              <select
-                onChange={this.handleChange}
-                name="post_type"
-                id="post_type"
-              >
-                <option value="boast">Boast</option>
-                <option value="roast">Roast</option>
-              </select>
-            </label>
-            <br />
-            <br />
-            <label>
-              Post Text:&nbsp;
-              <textarea
-                type="text"
-                name="post_text"
-                id="post_text"
-                placeholder="New post here"
-                rows="2"
-                columns="28"
-                width="100%"
-                autoFocus
-                required
-                onChange={this.handleChange}
-              />
-            </label>
-            <br />
-            <br />
-            <button type="submit">Submit</button>
-          </form>
+          <br />
+          <Card style={{ width: "30rem" }}>
+            <Card.Body>
+              <form id="postmessage-form" onSubmit={this.handleAddPost}>
+                <label>
+                  Boast or Roast:&nbsp;
+                  <select
+                    onChange={this.handleChange}
+                    name="post_type"
+                    id="post_type"
+                  >
+                    <option value="boast">Boast</option>
+                    <option value="roast">Roast</option>
+                  </select>
+                </label>
+                <br />
+                <br />
+                <label>
+                  Post Text:&nbsp;
+                  <textarea
+                    type="text"
+                    name="post_text"
+                    id="post_text"
+                    placeholder="New post here"
+                    rows="2"
+                    columns="28"
+                    width="100%"
+                    autoFocus
+                    required
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <br />
+                <br />
+                <Button type="submit">Submit</Button>
+              </form>
+            </Card.Body>
+          </Card>
         </div>
       </div>
     );

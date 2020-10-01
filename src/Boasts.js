@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 class Boasts extends React.Component {
   constructor(props) {
@@ -35,43 +37,51 @@ class Boasts extends React.Component {
         <br />
         <div className="menu-links">
           <Link to="/">
-            <button>All Posts</button>
+            <Button>All Posts</Button>
           </Link>
           <Link to="/boasts">
-            <button>All Boasts</button>
+            <Button>All Boasts</Button>
           </Link>
           <Link to="/roasts">
-            <button>All Roasts</button>
+            <Button>All Roasts</Button>
           </Link>
           <Link to="/popular">
-            <button>Most Popular</button>
+            <Button>Most Popular</Button>
           </Link>
           <Link to="/create">
-            <button>Create Post</button>
+            <Button>Create Post</Button>
           </Link>
         </div>
         <div className="main">
           <h1>Ghost Post</h1>
           <h2>- All Boasts</h2>
+          <br />
           {this.state.posts.map((p) => (
             <div key={p.id}>
-              <h3>{p.post_type.toUpperCase()}</h3>
-              <ul>
-                <li>Id: {p.id}</li>
-                <li>Post: {p.post_text}</li>
-                <li>Vote Score: {p.total_votes}</li>
-                <li>Submission Time: {p.submission_time}</li>
-                <li>Last Updated: {p.last_updated}</li>
-                <br />
-                <button onClick={this.handleUpvote(p.id)}>
-                  UP-{p.up_votes}
-                </button>
-                &nbsp;
-                <button onClick={this.handleDownvote(p.id)}>
-                  DOWN-{p.down_votes}
-                </button>
-                <br />
-              </ul>
+              <Card style={{ width: "30rem" }}>
+                <Card.Body>
+                  <div>
+                    <h3>{p.post_type.toUpperCase()}</h3>
+                    <h4>{p.post_text}</h4>
+                    <ul>
+                      <li>Id: {p.id}</li>
+                      <li>Vote Score: {p.total_votes}</li>
+                      <li>Submission Time: {p.submission_time}</li>
+                      <li>Last Updated: {p.last_updated}</li>
+                      <br />
+                      <Button onClick={this.handleUpvote(p.id)}>
+                        UP-{p.up_votes}
+                      </Button>
+                      &nbsp;
+                      <Button onClick={this.handleDownvote(p.id)}>
+                        DOWN-{p.down_votes}
+                      </Button>
+                      <br />
+                    </ul>
+                  </div>
+                </Card.Body>
+              </Card>
+              <br />
             </div>
           ))}
         </div>
