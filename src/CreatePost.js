@@ -5,16 +5,22 @@ import { Link } from "react-router-dom";
 class CreatePost extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      posts: [],
-    };
+    this.state = { password: "", about: "", displayName: "" };
   }
 
-  componentDidMount() {
-    fetch("http://127.0.0.1:8000/api/homepage/Highest_Rated/")
-      .then((res) => res.json())
-      .then((data) => this.setState({ posts: data }));
-  }
+  handleAddPost = (event) => {
+    event.preventDefault();
+    this.props.edituser(this.state);
+    document.getElementById("post_type").value = "";
+    document.getElementById("post_text").value = "";
+
+    let post_url = "http://127.0.0.1:8000/api/homepage/";
+    fetch(post_url, { method: "POST" });
+  };
+
+  handlechange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     return (
@@ -38,23 +44,36 @@ class CreatePost extends React.Component {
           </Link>
         </div>
         <div className="main">
-          <h1>Ghost Post</h1>
-          {this.state.posts.map((p) => (
-            <div key={p.id}>
-              <h3>{p.post_type.toUpperCase()}</h3>
-              <ul>
-                <li>Id: {p.id}</li>
-                <li>Post: {p.post_text}</li>
-                <li>Vote Score: {p.total_votes}</li>
-                <li>Submission Time: {p.submission_time}</li>
-                <li>Last Updated: {p.last_updated}</li>
-                <br />
-                <button>UP-{p.up_votes}</button>&nbsp;
-                <button>DOWN-{p.down_votes}</button>
-                <br />
-              </ul>
-            </div>
-          ))}
+          <h1>Create Post</h1>
+          <form id="postmessage-form" onSubmit={this.handleAddPost}>
+            <label>
+              Boast or Roast:&nbsp;
+              <select onChange={this.handleChange} name="post_type">
+                <option value="boast">Boast</option>
+                <option value="roast">Roast</option>
+              </select>
+            </label>
+            <br />
+            <br />
+            <label>
+              Post Text:&nbsp;
+              <textarea
+                type="text"
+                name="post_text"
+                id="post_text"
+                placeholder="new post here"
+                rows="2"
+                columns="28"
+                width="100%"
+                autoFocus
+                required
+                onChange={this.handleChange}
+              />
+            </label>
+            <br />
+            <br />
+            <button type="submit">Submit</button>
+          </form>
         </div>
       </div>
     );
