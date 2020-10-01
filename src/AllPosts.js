@@ -16,7 +16,18 @@ class AllPosts extends React.Component {
       .then((data) => this.setState({ posts: data }));
   }
 
-  render() {
+  handleUpvote = (post_id) => (event) => {
+    let post_url = "http://127.0.0.1:8000/api/homepage/" + post_id + "/upvote/";
+    fetch(post_url, { method: "POST" });
+  };
+
+  handleDownvote = (post_id) => (event) => {
+    let post_url =
+      "http://127.0.0.1:8000/api/homepage/" + post_id + "/downvote/";
+    fetch(post_url, { method: "POST" });
+  };
+
+  render(props) {
     return (
       <div>
         <br />
@@ -49,8 +60,13 @@ class AllPosts extends React.Component {
                 <li>Submission Time: {p.submission_time}</li>
                 <li>Last Updated: {p.last_updated}</li>
                 <br />
-                <button>UP-{p.up_votes}</button>&nbsp;
-                <button>DOWN-{p.down_votes}</button>
+                <button onClick={this.handleUpvote(p.id)}>
+                  UP-{p.up_votes}
+                </button>
+                &nbsp;
+                <button onClick={this.handleDownvote(p.id)}>
+                  DOWN-{p.down_votes}
+                </button>
                 <br />
               </ul>
             </div>
