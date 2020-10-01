@@ -5,21 +5,37 @@ import { Link } from "react-router-dom";
 class CreatePost extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { password: "", about: "", displayName: "" };
+    this.state = { post_type: "boast", post_text: "" };
   }
 
   handleAddPost = (event) => {
     event.preventDefault();
-    this.props.edituser(this.state);
-    document.getElementById("post_type").value = "";
-    document.getElementById("post_text").value = "";
+    let data = JSON.stringify({
+      post_type: this.state.post_type,
+      post_text: this.state.post_text,
+    });
+    console.log("data", data);
 
     let post_url = "http://127.0.0.1:8000/api/homepage/";
-    fetch(post_url, { method: "POST" });
+    fetch(post_url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      //   body: JSON.stringify(data),
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
-  handlechange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
@@ -48,7 +64,11 @@ class CreatePost extends React.Component {
           <form id="postmessage-form" onSubmit={this.handleAddPost}>
             <label>
               Boast or Roast:&nbsp;
-              <select onChange={this.handleChange} name="post_type">
+              <select
+                onChange={this.handleChange}
+                name="post_type"
+                id="post_type"
+              >
                 <option value="boast">Boast</option>
                 <option value="roast">Roast</option>
               </select>
@@ -61,7 +81,7 @@ class CreatePost extends React.Component {
                 type="text"
                 name="post_text"
                 id="post_text"
-                placeholder="new post here"
+                placeholder="New post here"
                 rows="2"
                 columns="28"
                 width="100%"
