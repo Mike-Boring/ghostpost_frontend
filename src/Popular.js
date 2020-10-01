@@ -53,6 +53,7 @@ class Popular extends React.Component {
         </div>
         <div className="main">
           <h1>Ghost Post</h1>
+          <h2>- Most Popular Posts</h2>
           {this.state.posts.map((p) => (
             <div key={p.id}>
               <h3>{p.post_type.toUpperCase()}</h3>

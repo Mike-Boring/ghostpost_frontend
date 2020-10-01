@@ -61,7 +61,8 @@ class CreatePost extends React.Component {
           </Link>
         </div>
         <div className="main">
-          <h1>Create Post</h1>
+          <h1>Ghost Post</h1>
+          <h2>- Create Post</h2>
           <form id="postmessage-form" onSubmit={this.handleAddPost}>
             <label>
               Boast or Roast:&nbsp;
