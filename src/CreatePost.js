@@ -14,8 +14,6 @@ class CreatePost extends React.Component {
       post_type: this.state.post_type,
       post_text: this.state.post_text,
     });
-    console.log("data", data);
-
     let post_url = "http://127.0.0.1:8000/api/homepage/";
     fetch(post_url, {
       method: "POST",
@@ -28,6 +26,9 @@ class CreatePost extends React.Component {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
+        document.getElementById("post_type").value = "boast";
+        document.getElementById("post_text").value = "";
+        window.location.href = "/";
       })
       .catch((error) => {
         console.error("Error:", error);

@@ -57,7 +57,7 @@ class Roasts extends React.Component {
               <ul>
                 <li>Id: {p.id}</li>
                 <li>Post: {p.post_text}</li>
-                <li>Vote Score: {p.up_votes - p.down_votes}</li>
+                <li>Vote Score: {p.total_votes}</li>
                 <li>Submission Time: {p.submission_time}</li>
                 <li>Last Updated: {p.last_updated}</li>
                 <br />
