@@ -64,7 +64,7 @@ class CreatePost extends React.Component {
         </div>
         <div className="main">
           <h1>Ghost Post</h1>
-          <h2>- Create Post</h2>
+          <h2>- Create New Post</h2>
           <br />
           <Card style={{ width: "30rem" }}>
             <Card.Body>
